@@ -9,9 +9,6 @@
     "url": "http://glitter.tech"
   },
   "files": [
-    "dashboard",
-    "graphics",
-    "extension.js",
     "extension"
   ],
   "keywords": [
@@ -22,6 +19,29 @@
   "nodecg": {
     "compatibleRange": ">=1.6.1"
   },
-  "repository": "https://github.com/nodecg/nodecg.git",
-  "license": "MIT"
+  "repository": "https://github.com/helloitsdan/nodecg-streamelements-alerts.git",
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run build:extension",
+    "build:extension": "NODE_ENV=production tsc --rootDir src --outDir .",
+    "lint": "eslint . --ext .ts",
+    "precommit": "lint-staged"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.0.2",
+    "@typescript-eslint/eslint-plugin-tslint": "^3.0.2",
+    "@typescript-eslint/parser": "^3.0.2",
+    "eslint": "^7.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsdoc": "^26.0.0",
+    "eslint-plugin-prefer-arrow": "^1.2.1",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.8",
+    "prettier": "^1.19.1",
+    "ts-loader": "^6.2.2",
+    "tslib": "^1.11.1",
+    "tslint": "^6.1.2",
+    "typescript": "^3.8.3"
+  }
 }

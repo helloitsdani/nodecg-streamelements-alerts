@@ -14,5 +14,8 @@ module.exports = {
     project: 'tsconfig.json',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', '@typescript-eslint/tslint']
+  plugins: ['@typescript-eslint', '@typescript-eslint/tslint'],
+  rules: {
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+  },
 }

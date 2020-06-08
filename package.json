@@ -1,0 +1,27 @@
+{
+  "name": "nodecg-streamelements-alerts",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "dani quinn sexton",
+    "email": "dani@glitter.tech",
+    "url": "http://glitter.tech"
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "nodecg-bundle",
+    "streamelements",
+    "alerts"
+  ],
+  "nodecg": {
+    "compatibleRange": ">=1.6.1"
+  },
+  "repository": "https://github.com/nodecg/nodecg.git",
+  "license": "MIT"
+}

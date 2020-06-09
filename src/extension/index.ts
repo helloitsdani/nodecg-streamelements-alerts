@@ -1,19 +1,14 @@
-import socket from './socket'
+import { NodeCG } from './types'
 
-interface NodeCG {
-  bundleConfig: BundleConfig
-}
-
-interface BundleConfig {
-  token: string
-}
+import context from './context'
+import createSocketConnection from './socket'
 
 module.exports = (nodecg: NodeCG) => {
-  const config = nodecg.bundleConfig
+  context.nodecg = nodecg
 
-  if (!config?.token) {
+  if (!context.config?.token) {
     throw new Error('Please set your StreamElements JWT token in cfg/nodecg-streamelements-alerts.json!')
   }
 
-  socket(config.token)
+  createSocketConnection(context.config.token)
 }

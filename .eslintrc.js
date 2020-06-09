@@ -16,6 +16,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', '@typescript-eslint/tslint'],
   rules: {
+    '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unsafe-assignment': 'off',
   },
 }

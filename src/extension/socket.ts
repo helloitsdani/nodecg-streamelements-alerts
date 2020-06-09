@@ -1,48 +1,55 @@
 import io from 'socket.io-client'
 
-export default (token: string): void => {
-  const socket = io('https://realtime.streamelements.com', {
+import context from './context'
+
+interface SEAuthenticatedMessage {
+  clientId: string
+  channelId: string
+  project: string
+  message: string
+}
+
+const createSocketConnection = (token: string): void => {
+  const socket = io('wss://realtime.streamelements.com', {
     transports: ['websocket'],
   })
 
   socket.on('connect', () => {
-    console.log('Successfully connected to the websocket')
+    context.log.info('Connected. Authenticating...')
+
     socket.emit('authenticate', {
       method: 'jwt',
       token,
     })
   })
 
-  // Socket got disconnected
-  socket.on('disconnect', () => {
-    console.log('Disconnected from websocket')
-    // Reconnect
+  socket.on('disconnected', () => {
+    context.log.info('Disconnected')
   })
 
-  // Socket is authenticated
-  socket.on('authenticated', (data: any) => {
-    const { channelId } = data
-
-    console.log(`Successfully connected to channel ${channelId as string}`)
+  socket.on('authenticated', (data: SEAuthenticatedMessage) => {
+    context.log.info(`Authenticated with channel ${data.channelId}`)
   })
 
+  // fired when a test event is sent/overlays are refreshed in the dashboard
   socket.on('event:test', (data: any) => {
     console.log(data)
-    // Structure as on JSON Schema
   })
 
+  // fired when a real alert is recieved
   socket.on('event', (data: any) => {
     console.log(data)
-    // Structure as on JSON Schema
   })
 
+  // fired when session data is updated, after other events have fired
   socket.on('event:update', (data: any) => {
     console.log(data)
-    // Structure as on https://github.com/StreamElements/widgets/blob/master/CustomCode.md#on-session-update
   })
 
+  // i mean who knows this is all undocumented
   socket.on('event:reset', (data: any) => {
     console.log(data)
-    // Structure as on https://github.com/StreamElements/widgets/blob/master/CustomCode.md#on-session-update
   })
 }
+
+export default createSocketConnection
